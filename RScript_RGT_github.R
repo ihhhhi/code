@@ -1,12 +1,19 @@
 
 library(lme4)
 
-groups <- c('Group_s')
+# Read data
+rate_dispoint = read.csv("rate_disp.csv")
+#View(rate_dispoint)
 
-for (i in 1:length(groups)){
-  #browser()
-  sink('output.txt', split=TRUE,append = TRUE)
-  print(groups[i])
+rate_regret = read.csv("rate_regret.csv")
+#View(rate_regret)
+
+anticipate_regret = read.csv("anticipate_regret.csv")
+#View(anticipate_regret)
+
+
+sink('results_group.txt', split=TRUE,append = TRUE)
+
   rate_dispoint = read.csv(paste("rate_dispoint_",groups[i],".csv",sep=""))
   #View(rate_dispoint)
   rate_regret = read.csv(paste("rate_regret_",groups[i],".csv",sep=""))
@@ -14,7 +21,7 @@ for (i in 1:length(groups)){
   anticipate_regret = read.csv(paste("anticipate_regret_",groups[i],".csv",sep=""))
   #View(anticipate_regret)
   rate_dispoint.model = lmer(rate1 ~ obt+chance_obt+group+group:obt+group:chance_obt+(1|subject),data=rate_dispoint)
-  #summary(rate_dispoint.model)
+  
   #pvals.fnc
   #languageR
 
@@ -27,6 +34,7 @@ for (i in 1:length(groups)){
   rate_disp.nullint2 = lmer(rate1 ~ obt+chance_obt+group+group:obt+(1|subject),data=rate_dispoint)
   results<-anova(rate_disp.nullint2,rate_disp.model)
   print(results)
+summary(rate_disp.model)
   #regret
   rate_regret.model = lmer(rate2 ~ obt+agent_obt+group+group:obt+group:agent_obt+(1|subject),data=rate_regret)
   rate_regret.nullgroup = lmer(rate2 ~ obt+agent_obt+group:obt+group:agent_obt+(1|subject),data=rate_regret)
@@ -38,6 +46,7 @@ for (i in 1:length(groups)){
   rate_regret.nullint2 = lmer(rate2 ~ obt+agent_obt+group+group:obt+(1|subject),data=rate_regret)
   results<-anova(rate_regret.nullint2,rate_regret.model)
   print(results)
+summary(rate_regret.model)
   #DM model
   anticipate_regret.model = lmer(choice ~ E + D + R + group:E + group:D + group:R + (1|subject),data=anticipate_regret)
   anticipate_regret.nullE = lmer(choice ~ D + R + group:E + group:D+ group:R + (1|subject),data=anticipate_regret)
@@ -58,7 +67,52 @@ for (i in 1:length(groups)){
   anticipate_regret.nullRG = lmer(choice ~ E + D + R + group:E + group:D + (1|subject),data=anticipate_regret)
   results<-anova(anticipate_regret.nullRG,anticipate_regret.model)
   print(results)
-  
+  summary(anticipate_regret.model)
+# Analyses within ISD 
+# Read data
+rate_dispoint = read.csv("rate_disp_SSI.csv")
+#View(rate_dispoint)
+
+rate_regret = read.csv("rate_regret_SSI.csv")
+#View(rate_regret)
+
+anticipate_regret = read.csv("anticipate_regret_SSI.csv")
+#View(anticipate_regret)
+
+
+sink('results_SSI.txt', split=TRUE,append = TRUE)
+
+#disappointment
+rate_disp.null = lmer(rate1 ~ obt+chance_obt+SSI19:obt+SSI19:chance_obt+(1|subject),data=rate_dispoint)
+results<-anova(rate_dispoint.null,rate_dispoint.model)
+#print("Rate_disp:SSI19");
+print(results)
+
+rate_disp.null = lmer(rate1 ~ SSI19+obt+chance_obt+SSI19:chance_obt+(1|subject),data=rate_dispoint)
+results<-anova(rate_disp.null,rate_disp.model)
+print(results)
+
+rate_disp.null = lmer(rate1 ~ SSI19+obt+chance_obt+SSI19:obt+(1|subject),data=rate_dispoint)
+results<-anova(rate_disp.null,rate_disp.model)
+print(results)
+summary(rate_disp.model)
+
+#regret
+rate_regret.model = lmer(rate2 ~ SSI19+obt+agent_obt+obt:SSI19+agent_obt:SSI19+(1|subject),data=rate_regret)
+
+rate_regret.null = lmer(rate2 ~ obt+agent_obt+SSI19:obt+SSI19:agent_obt+(1|subject),data=rate_regret)
+results<-anova(rate_regret.null,rate_regret.model)
+print(results)
+
+rate_regret.null = lmer(rate2 ~ SSI19+obt+agent_obt+SSI19:agent_obt+(1|subject),data=rate_regret)
+results<-anova(rate_regret.null,rate_regret.model)
+print(results)
+
+rate_regret.null = lmer(rate2 ~ SSI19+obt+agent_obt+SSI19:obt+(1|subject),data=rate_regret)
+results<-anova(rate_regret.null,rate_regret.model)
+print(results)
+summary(rate_regret.model)
+
   #anticipate SSI model: SSI effect
   anticipate_regret_SSI_worst.model=lmer(choice~ E + D + R + SSI_worst + SSI_worst:E + SSI_worst:D + SSI_worst:R + (1|subject), data=anticipate_regret_SSI_w_group_n159)
   anticipate_regret_SSI_worst.nullSSIE=lmer(choice~ E + D + R + SSI_worst + SSI_worst:D + SSI_worst:R + (1|subject), data=anticipate_regret_SSI_w_group_n159)
@@ -73,8 +127,9 @@ for (i in 1:length(groups)){
   results<-anova(anticipate_regret_SSI_worst.nullSSIR,anticipate_regret_SSI_worst.model)
   print(results)
 
-  sink()
+ summary(anticipate_regret_SSI_worst.model)
   
-  write('                                             ',file='output.txt',append=TRUE)
-  write('#############################################',file='output.txt',append=TRUE)
+  
+
+
 }
