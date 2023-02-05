@@ -114,10 +114,10 @@ print(results)
 summary(rate_regret.model)
 
   #anticipate SSI model: SSI effect
-  anticipate_regret_SSI_worst.model=lmer(choice~ E + D + R + SSI_worst + SSI_worst:E + SSI_worst:D + SSI_worst:R + (1|subject), data=anticipate_regret_SSI_w_group_n159)
-  anticipate_regret_SSI_worst.nullSSIE=lmer(choice~ E + D + R + SSI_worst + SSI_worst:D + SSI_worst:R + (1|subject), data=anticipate_regret_SSI_w_group_n159)
-  anticipate_regret_SSI_worst.nullSSID=lmer(choice~ E + D + R + SSI_worst + SSI_worst:E + SSI_worst:R + (1|subject), data=anticipate_regret_SSI_w_group_n159)
-  anticipate_regret_SSI_worst.nullSSIR=lmer(choice~ E + D + R + SSI_worst + SSI_worst:D + SSI_worst:E + (1|subject), data=anticipate_regret_SSI_w_group_n159)
+  anticipate_regret_SSI_worst.model=lmer(choice~ E + D + R + SSI_worst + SSI_worst:E + SSI_worst:D + SSI_worst:R + (1|subject), data=anticipate_regret_SSI_w)
+  anticipate_regret_SSI_worst.nullSSIE=lmer(choice~ E + D + R + SSI_worst + SSI_worst:D + SSI_worst:R + (1|subject), data=anticipate_regret_SSI_w)
+  anticipate_regret_SSI_worst.nullSSID=lmer(choice~ E + D + R + SSI_worst + SSI_worst:E + SSI_worst:R + (1|subject), data=anticipate_regret_SSI_w)
+  anticipate_regret_SSI_worst.nullSSIR=lmer(choice~ E + D + R + SSI_worst + SSI_worst:D + SSI_worst:E + (1|subject), data=anticipate_regret_SSI_w)
   results<-anova(anticipate_regret_SSI_worst.nullSSIE,anticipate_regret_SSI_worst.model)
   print(results)
   
