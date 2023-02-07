@@ -48,6 +48,10 @@ summary(rate_disp.model)
   print(results)
 summary(rate_regret.model)
   #DM model
+  ##main effect of E,D,R
+anticipate_regret_mainE.model = lmer(choice ~ E + D + R + (1|subject),data=anticipate_regret)
+summary(anticipate_regret_mainE.model)
+  ##interactions
   anticipate_regret.model = lmer(choice ~ E + D + R + group:E + group:D + group:R + (1|subject),data=anticipate_regret)
   anticipate_regret.nullE = lmer(choice ~ D + R + group:E + group:D+ group:R + (1|subject),data=anticipate_regret)
   results<-anova(anticipate_regret.nullE,anticipate_regret.model)
