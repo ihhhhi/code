@@ -134,13 +134,13 @@ summary(rate_regret.model)
  summary(anticipate_regret_SSI_worst.model)
   
 #AIC criteria for the best chice model
-anticipate_group_full_0209.nullgroupED<- lmer(choice ~ E + D + R + group:R + (1 | subject), data= data=anticipate_regret_SSI_w)
-anticipate_group_full_0209.nullgroupDR<- lmer(choice ~ E + D + R + group:E + (1 | subject), data= data=anticipate_regret_SSI_w)
-anticipate_group_full_0209.nullgroupER<- lmer(choice ~ E + D + R + group:D + (1 | subject), data= data=anticipate_regret_SSI_w)
-anticipate_group_full_0209.nullgroupR<- lmer(choice ~ E + D + R + group:E + group:D + (1 | subject), data= data=anticipate_regret_SSI_w)
-anticipate_group_full_0209.nullgroupE<- lmer(choice ~ E + D + R + group:D + group:R + (1 | subject), data= data=anticipate_regret_SSI_w)
-anticipate_group_full_0209.nullgroupD<- lmer(choice ~ E + D + R + group:E + group:R + (1 | subject), data= data=anticipate_regret_SSI_w)
-anticipate_group_full_0209 <- lmer(choice ~ E + D + R + group:E + group:D + group:R + (1 | subject), data= data=anticipate_regret_SSI_w)
+anticipate_group_full_0209.nullgroupED<- lmer(choice ~ E + D + R + group:R + (1 | subject), data=anticipate_regret_SSI_w)
+anticipate_group_full_0209.nullgroupDR<- lmer(choice ~ E + D + R + group:E + (1 | subject), data=anticipate_regret_SSI_w)
+anticipate_group_full_0209.nullgroupER<- lmer(choice ~ E + D + R + group:D + (1 | subject), data=anticipate_regret_SSI_w)
+anticipate_group_full_0209.nullgroupR<- lmer(choice ~ E + D + R + group:E + group:D + (1 | subject), data=anticipate_regret_SSI_w)
+anticipate_group_full_0209.nullgroupE<- lmer(choice ~ E + D + R + group:D + group:R + (1 | subject), data=anticipate_regret_SSI_w)
+anticipate_group_full_0209.nullgroupD<- lmer(choice ~ E + D + R + group:E + group:R + (1 | subject), data=anticipate_regret_SSI_w)
+anticipate_group_full_0209 <- lmer(choice ~ E + D + R + group:E + group:D + group:R + (1 | subject), data=anticipate_regret_SSI_w)
 
 results<- anova(anticipate_group_full_0209,anticipate_group_full_0209.nullgroupR,anticipate_group_full_0209.nullgroupE,anticipate_group_full_0209.nullgroupD,anticipate_group_full_0209.nullgroupED,anticipate_group_full_0209.nullgroupDR,anticipate_group_full_0209.nullgroupER)}
 print(results)
