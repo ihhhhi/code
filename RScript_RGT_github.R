@@ -144,3 +144,8 @@ anticipate_group_full_0209 <- lmer(choice ~ E + D + R + group:E + group:D + grou
 
 results<- anova(anticipate_group_full_0209,anticipate_group_full_0209.nullgroupR,anticipate_group_full_0209.nullgroupE,anticipate_group_full_0209.nullgroupD,anticipate_group_full_0209.nullgroupED,anticipate_group_full_0209.nullgroupDR,anticipate_group_full_0209.nullgroupER)}
 print(results)
+
+#check the best model estimates
+summary(anticipate_group_full_0209.nullgroupE)
+
+
